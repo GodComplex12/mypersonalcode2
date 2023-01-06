@@ -1,0 +1,23 @@
+import discord
+from discord.ext import commands
+import datetime
+
+client = commands.Bot(command_prefix = '!')
+
+@client.command()
+async def entrata(ctx):
+  username = ctx.message.author
+  time = datetime.datetime.now().strftime("%H:%M:%S")
+  with open('attendance.txt', 'a') as f:
+    f.write(f'{username} è entrato alle {time}\n')
+  await ctx.send(f'{username} ha timbrato il cartellino alle {time}')
+
+@client.command()
+async def uscita(ctx):
+  username = ctx.message.author
+  time = datetime.datetime.now().strftime("%H:%M:%S")
+  with open('attendance.txt', 'a') as f:
+    f.write(f'{username} è uscito alle {time}\n')
+  await ctx.send(f'{username} ha timbrato il cartellino alle {time}')
+
+client.run('e7b4f278965ed893b3562622aaad1942b200480f3ddaf8bd3c4953c701083c6f')
